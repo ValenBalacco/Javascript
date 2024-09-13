@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+  </head>
+  <body>
+    <p>Primer párrafo</p>
+    <p>Segundo párrafo</p>
+    <p>Tercer párrafo</p>
+    
+    <button onclick="cambiarColor()">Cambiar color a azul</button>
+
+    <script>
+        function cambiarColor() {
+            // Obtener todos los elementos <p> en la página
+            let elementosP = document.querySelectorAll('p');
+            
+            // Iterar sobre cada elemento <p> y cambiar su color
+            elementosP.forEach(function(elemento) {
+                elemento.style.color = 'blue';
+            });
+        }
+    </script>
+    <h1>Ejercicio 2: Furmalario Simple </h1>
+    
+    <form id="miFormulario">
+        <label for="texto">Ingrese un valor:</label>
+        <input type="text" id="texto" name="texto" required>
+        <button type="button" onclick="mostrarValor()">Mostrar Valor</button>
+    </form>
+
+    <script>
+        function mostrarValor() {
+            // Obtener el valor del campo de texto
+            let valor = document.getElementById('texto').value;
+            
+            // Mostrar una alerta con el valor ingresado
+            alert("El valor ingresado es: " + valor);
+        }
+    </script>
+
+    <h1>Ejercicio 1: Lista de Elementos</h1>
+    
+    <ul id="miLista">
+        <li>Elemento 1</li>
+        <li>Elemento 2</li>
+        <li>Elemento 3</li>
+        <li>Elemento 4</li>
+        <li>Elemento 5</li>
+    </ul>
+
+    <script>
+        // Función para manejar el clic en un elemento de la lista
+        function manejarClick(event) {
+            console.log(event.target.textContent); // Mostrar el texto del elemento clickeado en la consola
+        }
+
+        // Obtener todos los elementos <li> dentro de <ul>
+        let elementosLi = document.querySelectorAll('#miLista li');
+        
+        // Agregar un evento click a cada elemento <li>
+        elementosLi.forEach(function(elemento) {
+            elemento.addEventListener('click', manejarClick);
+        });
+    </script>
+
+    <h1>Ejercicio 2: Habilitar y Deshabilitar Campo de Texto</h1>
+    
+    <input type="text" id="miCampoTexto" placeholder="Ingrese texto aquí">
+    <button onclick="deshabilitarCampo()">Deshabilitar Campo</button>
+    <button onclick="habilitarCampo()">Habilitar Campo</button>
+
+    <script>
+        // Función para deshabilitar el campo de texto
+        function deshabilitarCampo() {
+            document.getElementById('miCampoTexto').disabled = true;
+        }
+
+        // Función para habilitar el campo de texto
+        function habilitarCampo() {
+            document.getElementById('miCampoTexto').disabled = false;
+        }
+    </script>
+    <div class="container">
+      <h1>Formulario de Correo</h1>
+      <form id="emailForm">
+          <label for="email">Correo electrónico:</label>
+          <input type="email" id="email" required>
+          <button type="submit">Guardar</button>
+      </form>
+      <div id="emailDisplay" class="hidden">
+          <p>Correo guardado: <span id="storedEmail"></span></p>
+          <button id="deleteButton">Eliminar</button>
+      </div>
+  </div>
+  
+  <script>
+      // Función para guardar el correo en localStorage
+      function saveEmail(email) {
+          localStorage.setItem('userEmail', email);
+      }
+
+      // Función para mostrar el correo en el DOM
+      function displayEmail(email) {
+          const emailDisplay = document.getElementById('emailDisplay');
+          const storedEmail = document.getElementById('storedEmail');
+          storedEmail.textContent = email;
+          emailDisplay.classList.remove('hidden');
+      }
+
+      // Función para eliminar el correo del localStorage
+      function deleteEmail() {
+          localStorage.removeItem('userEmail');
+          document.getElementById('emailDisplay').classList.add('hidden');
+      }
+
+      // Evento de envío del formulario
+      document.getElementById('emailForm').addEventListener('submit', function(event) {
+          event.preventDefault();
+          const emailInput = document.getElementById('email');
+          saveEmail(emailInput.value);
+          displayEmail(emailInput.value);
+          emailInput.value = '';
+      });
+
+      // Mostrar el correo guardado al cargar la página
+      window.addEventListener('load', function() {
+          const savedEmail = localStorage.getItem('userEmail');
+          if (savedEmail) {
+              displayEmail(savedEmail);
+          }
+      });
+
+      // Evento de clic en el botón de eliminar
+      document.getElementById('deleteButton').addEventListener('click', function() {
+          deleteEmail();
+          // Limpiar el campo de correo después de eliminar
+          document.getElementById('email').value = '';
+      });
+  </script>
+</body>
+</html>
